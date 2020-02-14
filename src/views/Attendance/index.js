@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 
 import { 
     Table, 
-    Badge,
-    Row,
-    Col
+    Badge
 } from 'react-bootstrap'
 
 import { 
     useParams, 
     Link 
 } from 'react-router-dom'
+
+import { MDBDataTable } from 'mdbreact'
 
 const Attendance = () => {
     const [session, setSession] = useState(null)
@@ -25,6 +25,39 @@ const Attendance = () => {
         let theAttendance = theSession.attendance.items
         setAttendance(theAttendance)
     }, [id])
+
+    const data = {
+        columns: [
+            {
+                label: 'Student ID',
+                field: 'studentUniqueName',
+                sort: 'asc'
+            },
+            {
+                label: 'Student name',
+                field: 'studentName',
+                sort: 'asc'
+            },
+            {
+                label: 'Mark',
+                field: 'mark',
+                sort: 'asc'
+            },
+            {
+                label: 'Marked at',
+                field: 'markedAt',
+                sort: 'asc'
+            }
+        ],
+        rows: attendance.map(item => {
+            return {
+                studentUniqueName: item.studentUniqueName,
+                studentName: item.studentName,
+                mark: item.mark_id === 0 ? <Badge variant="danger">{item.mark}</Badge> : <Badge variant="success">{item.mark}</Badge>,
+                markedAt: item.mark_id === 0 ? null : new Date(item.markedAt).toLocaleString()
+            }
+        })
+    }
 
     return (
         <div>
@@ -52,32 +85,12 @@ const Attendance = () => {
                     }
                 </tbody>
             </Table>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Student ID</th>
-                        <th>Student name</th>
-                        <th>Mark</th>
-                        <th>Marked at</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        attendance.map((item, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{index}</td>
-                                    <td>{item.studentUniqueName}</td>
-                                    <td>{item.studentName}</td>
-                                    <td>{item.mark_id === 0 ? <Badge variant="danger">{item.mark}</Badge> : <Badge variant="success">{item.mark}</Badge>}</td>
-                                    <td>{item.mark_id === 0 ? "Not marked" : new Date(item.markedAt).toLocaleString()}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </Table>
+            <MDBDataTable
+                striped
+                bordered
+                hover
+                data={data}
+            />
         </div>
     )
 }

@@ -44,15 +44,13 @@ const App = () => {
             <Row className="justify-content-end">
                 <Button onClick={() => setCount(count+1)}>Refresh</Button>
             </Row>
-            <Row>
-                <Router>
-                    <Switch>
-                        <Route path="/sessions" children={<Sessions />}/>
-                        <Route path="/attendance/:id" children={<Attendance />}/>
-                        <Redirect from="/" to="/sessions" />
-                    </Switch>
-                </Router>
-            </Row>
+            <Router>
+                <Switch>
+                    <Route path="/sessions" children={<Sessions />}/>
+                    <Route path="/attendance/:id" children={<Attendance />}/>
+                    <Redirect from="/" to="/sessions" />
+                </Switch>
+            </Router>
             
         </Container>
         
