@@ -14,7 +14,7 @@ import {
 
 const Attendance = () => {
     const [session, setSession] = useState(null)
-    const [attendances, setAttendances] = useState([])
+    const [attendance, setAttendance] = useState([])
     const { id } = useParams()
 
     useEffect(() => {
@@ -22,14 +22,14 @@ const Attendance = () => {
 
         let theSession = sessions.filter(item => item.id === id)[0]
         setSession(theSession)
-        let theAttendances = theSession.attendance.items
-        setAttendances(theAttendances)
+        let theAttendance = theSession.attendance.items
+        setAttendance(theAttendance)
     }, [id])
 
     return (
         <div>
-            <h1>Attendance</h1>
             <Link to={"/sessions/"}>Go back</Link>
+            <h1>Attendance</h1>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -64,7 +64,7 @@ const Attendance = () => {
                 </thead>
                 <tbody>
                     {
-                        attendances.map((item, index) => {
+                        attendance.map((item, index) => {
                             return (
                                 <tr key={index}>
                                     <td>{index}</td>
