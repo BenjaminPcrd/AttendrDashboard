@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Badge } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+
+import { 
+    Table, 
+    Badge 
+} from 'react-bootstrap'
+
+import { 
+    Link 
+} from 'react-router-dom'
 
 const Sessions = () => {
-    const [sessions, setSessions] = useState([])
+    const [sessions, setSessions] = useState()
 
     useEffect(() => {
         setSessions(JSON.parse(localStorage.getItem("sessions")))
@@ -11,6 +18,7 @@ const Sessions = () => {
 
     return (
         <div>
+            <h1>Sessions</h1>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -24,18 +32,20 @@ const Sessions = () => {
                 </thead>
                 <tbody>
                     {
-                        sessions.map((item, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{index}</td>
-                                    <td>{item.event_id}</td>
-                                    <td>{item.event_date}</td>
-                                    <td>{item.room.uniqueName}</td>
-                                    <td><Badge variant="primary">{item.module.uniqueName}</Badge> / {item.module.name}</td>
-                                    <td><Link to={"/attendance/" + item.id}>View Attendance</Link></td>
-                                </tr>
-                            )
-                        })
+                        sessions != null ? (
+                            sessions.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{index}</td>
+                                        <td>{item.event_id}</td>
+                                        <td>{item.event_date}</td>
+                                        <td>{item.room.uniqueName}</td>
+                                        <td><Badge variant="primary">{item.module.uniqueName}</Badge> / {item.module.name}</td>
+                                        <td><Link to={"/attendance/" + item.id}>View Attendance</Link></td>
+                                    </tr>
+                                )
+                            })
+                        ) : null
                     }
                 </tbody>
             </Table>
