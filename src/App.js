@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect
+  } from "react-router-dom"
+
+import Sessions from './views/Sessions'
+import Attendance from './views/Attendance'
+
+const App = () => {
+    useEffect(() => {
+        const url = 'https://xhg56111bk.execute-api.eu-west-2.amazonaws.com/prod/attendance/accelerator'
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                let sessions = data.items
+                sessions = sessions.map(item => {
+                    return {...item, module: JSON.parse(item.module), room: JSON.parse(item.room)}
+                })
+                localStorage.setItem("sessions", JSON.stringify(sessions))
+            })
+            .catch(error => console.log(error))
+    }, [])
+    
+    return (
+        <Router>
+            <Switch>
+                <Route path="/sessions" children={<Sessions />}/>
+                <Route path="/attendance/:id" children={<Attendance />}/>
+                <Redirect from="/" to="/sessions" />
+            </Switch>
+        </Router>
+    )
+    
 }
 
-export default App;
+export default App
