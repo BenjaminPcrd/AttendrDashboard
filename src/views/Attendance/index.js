@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 
 import { 
     Table, 
-    Badge
+    Badge,
+    Card,
+    CardGroup
 } from 'react-bootstrap'
 
 import { 
@@ -12,9 +14,12 @@ import {
 
 import { MDBDataTable } from 'mdbreact'
 
+import PieChart from 'react-minimal-pie-chart'
+
 const Attendance = () => {
     const [session, setSession] = useState(null)
     const [attendance, setAttendance] = useState([])
+    const [absenteeism, setAbsenteeism] = useState({ present: 0, absent: 0, perPresent: 0, perAbsent: 0 })
     const { id } = useParams()
 
     useEffect(() => {
@@ -24,6 +29,12 @@ const Attendance = () => {
         setSession(theSession)
         let theAttendance = theSession.attendance.items
         setAttendance(theAttendance)
+
+        let nbPresent = theAttendance.map(item => item.mark_id).reduce((i, j) => i + j)
+        let total = theAttendance.length
+        let nbAbsent = total - nbPresent
+        setAbsenteeism({ present: nbPresent, absent: nbAbsent })
+
     }, [id])
 
     const data = {
@@ -31,22 +42,18 @@ const Attendance = () => {
             {
                 label: 'Student ID',
                 field: 'studentUniqueName',
-                sort: 'asc'
             },
             {
                 label: 'Student name',
-                field: 'studentName',
-                sort: 'asc'
+                field: 'studentName'
             },
             {
                 label: 'Mark',
                 field: 'mark',
-                sort: 'asc'
             },
             {
                 label: 'Marked at',
                 field: 'markedAt',
-                sort: 'asc'
             }
         ],
         rows: attendance.map(item => {
@@ -85,11 +92,67 @@ const Attendance = () => {
                     }
                 </tbody>
             </Table>
+            
+            <CardGroup>
+                <Card>
+                    <Card.Header>
+                        Absenteeism rate
+                    </Card.Header>
+                    <Card.Body>
+                        <PieChart
+                            animate={true}
+                            animationDuration={500}
+                            animationEasing="ease-out"
+                            data={[
+                                {
+                                    title: "present",
+                                    value: absenteeism.present,
+                                    color: 'green'
+                                },
+                                {
+                                    title: "absent",
+                                    value: absenteeism.absent,
+                                    color: 'red'
+                                }
+                            ]}
+                            label={({data, dataIndex}) => {
+                                if(data[dataIndex].title === "present") {
+                                    if(data[dataIndex].percentage > 0)
+                                        return Math.round(data[dataIndex].percentage) + "%"
+                                } else {
+                                    if(data[dataIndex].percentage > 0)
+                                        return Math.round(data[dataIndex].percentage) + "%"
+                                }
+                            }}
+                            labelPosition={50}
+                            labelStyle={{
+                                fill: "white",
+                                fontSize: "10px"
+                            }}
+                            style={{
+                                height: "200px"
+                            }}
+                        />
+                    </Card.Body>
+                    <Card.Footer className="d-flex justify-content-around">
+                        <Badge variant="success">{absenteeism.present} present</Badge>
+                        <Badge variant="danger">{absenteeism.absent} absent</Badge>
+                        <Badge variant="primary">{absenteeism.absent + absenteeism.present} total</Badge>
+                    </Card.Footer>
+                </Card>
+                <Card>
+                    <Card.Header></Card.Header>
+                    <Card.Body></Card.Body>
+                    <Card.Footer></Card.Footer>
+                </Card>
+            </CardGroup>
+            
             <MDBDataTable
                 striped
                 bordered
                 hover
                 data={data}
+                noBottomColumns
             />
         </div>
     )

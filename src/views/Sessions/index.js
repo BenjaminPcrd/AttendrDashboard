@@ -61,6 +61,7 @@ const Sessions = () => {
                 bordered
                 hover
                 data={data}
+                noBottomColumns
             />
         </div>
     )
