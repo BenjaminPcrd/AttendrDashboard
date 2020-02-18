@@ -135,15 +135,10 @@ const Attendance = () => {
                         />
                     </Card.Body>
                     <Card.Footer className="d-flex justify-content-around">
-                        <Badge variant="success">{absenteeism.present} present</Badge>
-                        <Badge variant="danger">{absenteeism.absent} absent</Badge>
-                        <Badge variant="primary">{absenteeism.absent + absenteeism.present} total</Badge>
+                        <Badge style={{fontSize: "20px"}} variant="success">{absenteeism.present} present</Badge>
+                        <Badge style={{fontSize: "20px"}} variant="danger">{absenteeism.absent} absent</Badge>
+                        <Badge style={{fontSize: "20px"}} variant="primary">{absenteeism.absent + absenteeism.present} total</Badge>
                     </Card.Footer>
-                </Card>
-                <Card>
-                    <Card.Header></Card.Header>
-                    <Card.Body></Card.Body>
-                    <Card.Footer></Card.Footer>
                 </Card>
             </CardGroup>
             
@@ -153,6 +148,7 @@ const Attendance = () => {
                 hover
                 data={data}
                 noBottomColumns
+                entries={100}
             />
         </div>
     )

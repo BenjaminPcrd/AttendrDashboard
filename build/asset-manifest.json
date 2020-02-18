@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.js": "/static/js/main.1675a710.chunk.js",
+    "main.js.map": "/static/js/main.1675a710.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.04cfb6d1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.04cfb6d1.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.989ae7ce.chunk.js": "/static/js/2.989ae7ce.chunk.js",
+    "static/js/2.989ae7ce.chunk.js.map": "/static/js/2.989ae7ce.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.1f3f4d67475ec8ffedf8c8d290b8c38b.js": "/precache-manifest.1f3f4d67475ec8ffedf8c8d290b8c38b.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/static/css/2.47e06e2e.chunk.css.map",
+    "static/js/2.989ae7ce.chunk.js.LICENSE.txt": "/static/js/2.989ae7ce.chunk.js.LICENSE.txt",
+    "static/media/attendr-logo-primary.png": "/static/media/attendr-logo-primary.51a2cc64.png",
+    "static/media/rguAccelerator.jpg": "/static/media/rguAccelerator.6e03a1a3.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.04cfb6d1.js",
+    "static/css/2.47e06e2e.chunk.css",
+    "static/js/2.989ae7ce.chunk.js",
+    "static/js/main.1675a710.chunk.js"
+  ]
+}
