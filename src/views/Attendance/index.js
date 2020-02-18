@@ -18,7 +18,7 @@ import PieChart from 'react-minimal-pie-chart'
 
 const Attendance = () => {
     const [session, setSession] = useState(null)
-    const [attendance, setAttendance] = useState([])
+    const [attendance, setAttendance] = useState(null)
     const [absenteeism, setAbsenteeism] = useState({ present: 0, absent: 0, perPresent: 0, perAbsent: 0 })
     const { id } = useParams()
 
@@ -56,14 +56,16 @@ const Attendance = () => {
                 field: 'markedAt',
             }
         ],
-        rows: attendance.map(item => {
-            return {
-                studentUniqueName: item.studentUniqueName,
-                studentName: item.studentName,
-                mark: item.mark_id === 0 ? <Badge variant="danger">{item.mark}</Badge> : <Badge variant="success">{item.mark}</Badge>,
-                markedAt: item.mark_id === 0 ? null : new Date(item.markedAt).toLocaleString()
-            }
-        })
+        rows: attendance != null ? (
+            attendance.map(item => {
+                return {
+                    studentUniqueName: item.studentUniqueName,
+                    studentName: item.studentName,
+                    mark: item.mark_id === 0 ? <Badge variant="danger">{item.mark}</Badge> : <Badge variant="success">{item.mark}</Badge>,
+                    markedAt: item.mark_id === 0 ? null : new Date(item.markedAt).toLocaleString()
+                }
+            })
+        ) : []
     }
 
     return (
@@ -141,15 +143,21 @@ const Attendance = () => {
                     </Card.Footer>
                 </Card>
             </CardGroup>
+        
+            {
+                attendance != null ? (
+                <MDBDataTable
+                    striped
+                    bordered
+                    hover
+                    data={data}
+                    noBottomColumns
+                    entries={100}
+                    order={['studentName', 'asc']}
+                />
+                ) : null
+            }
             
-            <MDBDataTable
-                striped
-                bordered
-                hover
-                data={data}
-                noBottomColumns
-                entries={100}
-            />
         </div>
     )
 }

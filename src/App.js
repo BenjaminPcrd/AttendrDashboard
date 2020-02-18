@@ -12,16 +12,26 @@ import {
     Row,
     Col,
     Image,
-    Button
+    Button,
+    Spinner
 } from 'react-bootstrap'
 
 import Sessions from './views/Sessions'
 import Attendance from './views/Attendance'
 
 const App = () => {
-    const [count, setCount] = useState(0)
+    const [isSessions, setIsSessions] = useState(false)
 
     useEffect(() => {
+        if(localStorage.getItem("sessions") == null) {
+            getData()
+        } else {
+            setIsSessions(true)
+        }
+    }, [])
+
+    const getData = () => {
+        console.log("getData")
         const url = 'https://xhg56111bk.execute-api.eu-west-2.amazonaws.com/prod/attendance/accelerator'
         fetch(url)
             .then(response => response.json())
@@ -31,10 +41,12 @@ const App = () => {
                     return {...item, module: JSON.parse(item.module), room: JSON.parse(item.room)}
                 })
                 localStorage.setItem("sessions", JSON.stringify(sessions))
+                setIsSessions(false)
+                setIsSessions(true)
             })
             .catch(error => console.log(error))
-    }, [count])
-    
+    }
+
     return (
         <Container>
             <Row className="align-items-center">
@@ -42,15 +54,19 @@ const App = () => {
                 <Col><Image src={require('./assets/attendr-logo-primary.png')} width="150" /></Col>
             </Row>
             <Row className="justify-content-end">
-                <Button onClick={() => setCount(count+1)}>Refresh</Button>
+                <Button onClick={() => getData()}>Refresh</Button>
             </Row>
-            <Router>
-                <Switch>
-                    <Route path="/sessions" children={<Sessions />}/>
-                    <Route path="/attendance/:id" children={<Attendance />}/>
-                    <Redirect from="/" to="/sessions" />
-                </Switch>
-            </Router>
+            {
+                isSessions ? (
+                    <Router>
+                        <Switch>
+                            <Route path="/sessions" children={<Sessions />}/>
+                            <Route path="/attendance/:id" children={<Attendance />}/>
+                            <Redirect from="/" to="/sessions" />
+                        </Switch>
+                    </Router>
+                ) : <Spinner animation="border" />
+            }
             
         </Container>
         
