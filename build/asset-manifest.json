@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.js": "/static/js/main.dae5210d.chunk.js",
-    "main.js.map": "/static/js/main.dae5210d.chunk.js.map",
+    "main.js": "/static/js/main.33195296.chunk.js",
+    "main.js.map": "/static/js/main.33195296.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.04cfb6d1.js",
     "runtime-main.js.map": "/static/js/runtime-main.04cfb6d1.js.map",
     "static/css/2.47e06e2e.chunk.css": "/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.421767be.chunk.js": "/static/js/2.421767be.chunk.js",
-    "static/js/2.421767be.chunk.js.map": "/static/js/2.421767be.chunk.js.map",
+    "static/js/2.6b219c3a.chunk.js": "/static/js/2.6b219c3a.chunk.js",
+    "static/js/2.6b219c3a.chunk.js.map": "/static/js/2.6b219c3a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.bee238b9df864dcf6aa8fc8225059a4a.js": "/precache-manifest.bee238b9df864dcf6aa8fc8225059a4a.js",
+    "precache-manifest.ef4579dbce1c1e2616ebcdef09ee40d0.js": "/precache-manifest.ef4579dbce1c1e2616ebcdef09ee40d0.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/static/css/2.47e06e2e.chunk.css.map",
-    "static/js/2.421767be.chunk.js.LICENSE.txt": "/static/js/2.421767be.chunk.js.LICENSE.txt",
+    "static/js/2.6b219c3a.chunk.js.LICENSE.txt": "/static/js/2.6b219c3a.chunk.js.LICENSE.txt",
     "static/media/attendr-logo-primary.png": "/static/media/attendr-logo-primary.51a2cc64.png",
     "static/media/rguAccelerator.jpg": "/static/media/rguAccelerator.6e03a1a3.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.04cfb6d1.js",
     "static/css/2.47e06e2e.chunk.css",
-    "static/js/2.421767be.chunk.js",
-    "static/js/main.dae5210d.chunk.js"
+    "static/js/2.6b219c3a.chunk.js",
+    "static/js/main.33195296.chunk.js"
   ]
 }
