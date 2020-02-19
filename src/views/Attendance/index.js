@@ -16,6 +16,8 @@ import { MDBDataTable } from 'mdbreact'
 
 import PieChart from 'react-minimal-pie-chart'
 
+import CsvDownload from 'react-json-to-csv'
+
 const Attendance = () => {
     const [session, setSession] = useState(null)
     const [attendance, setAttendance] = useState(null)
@@ -146,15 +148,27 @@ const Attendance = () => {
         
             {
                 attendance != null ? (
-                <MDBDataTable
-                    striped
-                    bordered
-                    hover
-                    data={data}
-                    noBottomColumns
-                    entries={100}
-                    order={['studentName', 'asc']}
-                />
+                    <div>
+                        <CsvDownload data={attendance} style={{
+                            backgroundColor: '#007aff',
+                            borderRadius:"6px",
+                            border:"1px solid",
+                            color: 'white',
+                            fontSize: 18,
+                            fontWeight: 'bold',
+                            padding: 10,
+                            margin: 10
+                        }}/>
+                        <MDBDataTable
+                            striped
+                            bordered
+                            hover
+                            data={data}
+                            noBottomColumns
+                            entries={100}
+                            order={['studentName', 'asc']}
+                        />
+                    </div>
                 ) : null
             }
             
